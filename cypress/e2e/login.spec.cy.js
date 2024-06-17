@@ -1,23 +1,29 @@
-let EMAIL_ADDRESS;
-let PASSWORD;
-let USER_NAME;
-describe("Regular login", () => {
-  beforeEach(() => {
-    EMAIL_ADDRESS = Cypress.env("email");
-    PASSWORD = Cypress.env("password");
-    USER_NAME = Cypress.env("userName");
+describe("Regular login via the UI", () => {
+  const login = {
+    emailAddress: Cypress.env("email"),
+    password: Cypress.env("password"),
+    userName: Cypress.env("userName"),
+    tenantID: Cypress.env("tenantID"),
+  };
 
-    cy.session(EMAIL_ADDRESS, () => {
-      cy.log(`**--- Log in with regular user's credentials ---**`);
-      cy.loginUI(EMAIL_ADDRESS, PASSWORD).then((data) => {
-        cy.visit(`${Cypress.config().baseUrl}/en/products`);
-      });
+  beforeEach(() => {
+    cy.log(`**--- Log in with regular user's credentials via the UI---**`);
+    cy.session(login.emailAddress, () => {
+      cy.loginUI(login.emailAddress, login.password, login.tenantID);
     });
   });
 
-  it('Checks a regular User can access the app', () => {
+  after(() => {
+    cy.log("**--- Log out the user (via UI) ---**");
+    cy.logoutUI();
+  });
+  it("Checks a regular User can access the app", () => {
     cy.visit(`${Cypress.config().baseUrl}/en/products`);
     cy.url().should("include", "/products");
-    cy.get(".mat-list-text").should("have.text", USER_NAME);
+    cy.log(`**--- Verify user's name---**`);
+    cy.get("[data-cy='user-menu-user-name']").should(
+      "have.text",
+      login.userName
+    );
   });
 });
