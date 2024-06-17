@@ -1,4 +1,5 @@
-describe("Regular login via the UI", () => {
+let SESSION_TOKEN;
+describe("Log in via the API", () => {
   const login = {
     emailAddress: Cypress.env("email"),
     password: Cypress.env("password"),
@@ -7,17 +8,23 @@ describe("Regular login via the UI", () => {
   };
 
   beforeEach(() => {
-    cy.log(`**--- Log in with regular user's credentials via the UI---**`);
+    cy.log(`**--- Log in with regular user's credentials via the API---**`);
     cy.session(login.emailAddress, () => {
-      cy.loginUI(login.emailAddress, login.password, login.tenantID);
+      cy.loginViaAPI(login.emailAddress, login.password, login.tenantID).then(
+        (newSessionToken) => {
+          SESSION_TOKEN = newSessionToken;
+          cy.log(`**The new token is: ${SESSION_TOKEN}**`);
+        }
+      );
     });
   });
 
   after(() => {
-    cy.log("**--- Log out the user (via UI) ---**");
-    cy.logoutUI();
+    cy.log("**--- Log out the user (via API) ---**");
+    cy.logoutViaAPI(SESSION_TOKEN);
   });
-  it("Checks a regular User can access the app", () => {
+
+  it("Checks a regular User can access the app", function () {
     cy.visit(`${Cypress.config().baseUrl}/en/products`);
     cy.url().should("include", "/products");
     cy.log(`**--- Verify user's name---**`);
