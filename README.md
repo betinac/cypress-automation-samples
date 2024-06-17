@@ -26,7 +26,8 @@ _For example:_
 {
     "userName": "My User Name",
     "email": "my-user",
-    "password": "s3creT-p@ssw0rd"
+    "password": "s3creT-p@ssw0rd",
+    "tenantID": "HS"
 }
 ```
 
