@@ -7,9 +7,12 @@ describe("Regular login via the UI", () => {
   };
 
   beforeEach(() => {
+    cy.intercept("POST", "/api/tenants/login/session").as("verifyUser");
     cy.log(`**--- Log in with regular user's credentials via the UI---**`);
     cy.session(login.emailAddress, () => {
       cy.loginUI(login.emailAddress, login.password, login.tenantID);
+      cy.waitAndAssertStatusCode("verifyUser", 201);
+      cy.log(`**--- User is logged in ---**`);
     });
   });
 
