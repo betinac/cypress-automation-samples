@@ -1,35 +1,7 @@
 import { validateSchema } from "cypress-ajv-schema-validator";
+// OpenAPI schema doc as a fixture file
+import schema from '../../fixtures/schemas/openapi-schema.json'
 
-const schema = {
-  openapi: "3.0.3",
-  paths: {
-    "/vehicles/{vin}/status/odometer": {
-      parameters: {
-        $ref: "#/components/parameters/vinParam",
-      },
-      get: {
-        summary: "Returns the current odometer reading in both km and miles",
-        operationId: "getOdometerStatus",
-        responses: {
-          200: {
-            description: "Success",
-            content: {
-              "application/json": {
-                schema: {
-                  type: "object",
-                  properties: {
-                    km: { type: "number" },
-                    miles: { type: "number" },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
-};
 const example = {
   km: 100000,
   miles: 62000,
