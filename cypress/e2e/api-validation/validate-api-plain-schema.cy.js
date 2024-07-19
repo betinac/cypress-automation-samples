@@ -1,10 +1,6 @@
-const schema = {
-  type: "object",
-  properties: {
-    km: { type: "number" },
-    miles: { type: "number" },
-  },
-};
+// Plain JSON schema doc as a fixture file
+import schema from '../../fixtures/schemas/plain-json-schema.json'
+
 const example = {
   km: 100000,
   miles: 62000,
