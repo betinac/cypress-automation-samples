@@ -1,0 +1,47 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Vehicle Status",
+        "version": "1.0.0",
+        "description": "API to perform critical status checks on connected vehicles"
+    },
+    "paths": {
+        "/vehicles/{vin}/status/odometer": {
+            "parameters": "- $ref: '#/components/parameters/vinParam'",
+            "get": {
+                "summary": "Returns the current odometer reading in both km and miles",
+                "operationId": "getOdometerStatus",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "km": {
+                                            "type": "number"
+                                        },
+                                        "miles": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "Success": {
+                                    "value": {
+                                        "km": "100000",
+                                        "miles": "62000"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": "$ref: '#/components/responses/404NotFound'",
+                    "500": "$ref: '#/components/responses/500UnexpectedError'"
+                }
+            }
+        }
+    }
+}

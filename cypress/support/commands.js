@@ -1,5 +1,9 @@
 import "./commands/index";
 
+// Include the custom command and 'validateSchema' function globally
+// https://github.com/sclavijosuero/cypress-ajv-schema-validator/blob/main/README.md
+import 'cypress-ajv-schema-validator'
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite

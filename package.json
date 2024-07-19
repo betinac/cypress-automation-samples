@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.11.0"
+  },
+  "dependencies": {
+    "cypress-ajv-schema-validator": "^1.1.0"
   }
 }
