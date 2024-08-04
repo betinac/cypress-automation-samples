@@ -21,7 +21,7 @@ describe("Regular login via the UI", () => {
     cy.logoutOrangeHrmUI(login.orangeHrmUrl);
   });
 
-  it.skip("Checks a regular User can access the app", () => {
+  it("Checks a regular User can access the app", () => {
     // An uncaught exception is thrown on the Dashboard
     cy.on("uncaught:exception", (err, runnable) => {
       expect(err.message).to.include(
