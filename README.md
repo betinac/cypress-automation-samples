@@ -41,6 +41,3 @@ _For example:_
 - [UI Testing](cypress/docs/UI-testing.md): check scenarios that I've automated via the UI.
 
 - [API Testing](cypress/docs/API-testing.md): check scenarios that I've automated via the API.
-
-
-
