@@ -19,3 +19,18 @@ Cypress.Commands.add("logoutUI", () => {
   cy.log(`**--- User is logged out ---**`);
   cy.url().should("include", "/login");
 });
+
+Cypress.Commands.add("logoutOrangeHrmUI", (url) => {
+  cy.intercept("GET", `${url}/web/index.php/auth/logout`).as("deletedUser");
+
+  cy.visit(url);
+  cy.get(".oxd-userdropdown-tab")
+    .click()
+    .then((menu) => {
+      cy.get("[role='menuitem']").last().should("have.text", "Logout");
+      cy.get("[role='menuitem']").last().click();
+    });
+  cy.waitAndAssertStatusCode("deletedUser", 302);
+  cy.log(`**--- User is logged out ---**`);
+  cy.url().should("include", "/login");
+});

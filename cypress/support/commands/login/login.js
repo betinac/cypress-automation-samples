@@ -5,3 +5,10 @@ Cypress.Commands.add("loginUI", (email, password, tenantID) => {
   cy.get("[data-cy='password-input']").type(password, { log: false });
   cy.get("[data-cy='login-button']").click();
 });
+
+Cypress.Commands.add("loginOrangeHrmUI", (username, password, url) => {
+  cy.visit(url);
+  cy.get("[name='username']").type(username, { log: false });
+  cy.get("[type='password']").type(password, { log: false });
+  cy.get("[type='submit']").click();
+});
