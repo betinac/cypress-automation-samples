@@ -12,7 +12,7 @@ const path = "/v1/vehicles/4Y1SL65848Z411439/status/odometer";
 const endpoint = "/vehicles/{vin}/status/odometer";
 const baseUrl = `${server}${path}`;
 describe("API Schema Validation with OpenAPI - Custom Command", () => {
-  it("Checks the user data by using a plain JSON Schema", () => {
+  it("Checks the user data by using an OpenAPI JSON Schema", () => {
     cy.request("GET", baseUrl)
       .validateSchema(schema, {
         endpoint: endpoint,
@@ -35,7 +35,7 @@ describe("API Schema Validation with OpenAPI - Custom Command", () => {
 * with cy.request().
 */
 describe("API Schema Validation with OpenAPI - Function", () => {
-  it("Checks the user data by using a plain JSON Schema", () => {
+  it("Checks the user data by using an OpenAPI JSON Schema", () => {
     cy.request("GET", baseUrl).then((response) => {
       const data = response.body;
       const errors = validateSchema(data, schema, {
