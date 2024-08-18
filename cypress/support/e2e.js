@@ -18,3 +18,12 @@ import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// Include the custom command and 'validateSchema' function globally
+// https://github.com/sclavijosuero/cypress-ajv-schema-validator/blob/main/README.md
+import 'cypress-ajv-schema-validator'
+
+// load and register the grep feature
+// https://github.com/bahmutov/cy-grep
+const registerCypressGrep = require('@bahmutov/cy-grep')
+registerCypressGrep()

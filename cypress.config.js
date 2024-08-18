@@ -6,6 +6,10 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   videoCompression: 0,
   defaultCommandTimeout: 20000,
+  env:{
+    grepFilterSpecs: true, //pre-filter specs first
+    grepPrefixAt: true, // prefix tags with '@'
+  },
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here

@@ -6,13 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:open": "cypress open",
-    "cy:run": "cypress run", 
-    "cy:regression": "cypress run --env TAG=regression"
+    "cy:run": "cypress run",
+    "cy:regression": "cypress run --env grepTags=regression"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@bahmutov/cy-grep": "^1.11.3",
     "cypress": "^13.11.0"
   },
   "dependencies": {
