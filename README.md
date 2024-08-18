@@ -41,3 +41,5 @@ _For example:_
 - [UI Testing](cypress/docs/UI-testing.md): check scenarios that I've automated via the UI.
 
 - [API Testing](cypress/docs/API-testing.md): check scenarios that I've automated via the API.
+
+- [Filter tests](cypress/docs/Filter-tests.md): filter and run tests by a substring or Tags.
