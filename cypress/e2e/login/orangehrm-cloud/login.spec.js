@@ -21,22 +21,26 @@ describe("Regular login via the UI", () => {
     cy.logoutOrangeHrmUI(login.orangeHrmUrl);
   });
 
-  it("Checks a regular User can access the app", () => {
-    // An uncaught exception is thrown on the Dashboard
-    cy.on("uncaught:exception", (err, runnable) => {
-      expect(err.message).to.include(
-        `Cannot read properties of undefined (reading 'response'`
-      );
-      return false;
-    });
+  it(
+    "Checks a regular User can access the app (OrangeHR)",
+    { tags: ["@loginUI", "@regression"] },
+    () => {
+      // An uncaught exception is thrown on the Dashboard
+      cy.on("uncaught:exception", (err, runnable) => {
+        expect(err.message).to.include(
+          `Cannot read properties of undefined (reading 'response'`
+        );
+        return false;
+      });
 
-    cy.visit(login.orangeHrmUrl);
-    cy.url().should("include", "/dashboard");
-    cy.log(`**--- Verify user's name---**`);
+      cy.visit(login.orangeHrmUrl);
+      cy.url().should("include", "/dashboard");
+      cy.log(`**--- Verify user's name---**`);
 
-    // We cannot use the user's name as it changes everytime we log in
-    // cy.get(".oxd-userdropdown-name").should('have.text', login.user)
-    // Let's check for the title
-    cy.get(".oxd-topbar-header-title").contains("Dashboard");
-  });
+      // We cannot use the user's name as it changes everytime we log in
+      // cy.get(".oxd-userdropdown-name").should('have.text', login.user)
+      // Let's check for the title
+      cy.get(".oxd-topbar-header-title").contains("Dashboard");
+    }
+  );
 });

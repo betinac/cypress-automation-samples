@@ -23,7 +23,7 @@ describe("Regular login via the UI", () => {
     cy.log("**--- Log out the user (via UI) ---**");
     cy.logoutUI();
   });
-  it("Checks a regular User can access the app", () => {
+  it("Checks a regular User can access the app", { tags: "@loginUI" }, () => {
     cy.visit(`${Cypress.config().baseUrl}/en/products`);
     cy.url().should("include", "/products");
     cy.log(`**--- Verify user's name---**`);

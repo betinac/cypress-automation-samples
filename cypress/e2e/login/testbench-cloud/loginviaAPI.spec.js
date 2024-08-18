@@ -24,13 +24,17 @@ describe("Log in via the API", () => {
     cy.logoutViaAPI(SESSION_TOKEN);
   });
 
-  it("Checks a regular User can access the app", function () {
-    cy.visit(`${Cypress.config().baseUrl}/en/products`);
-    cy.url().should("include", "/products");
-    cy.log(`**--- Verify user's name---**`);
-    cy.get("[data-cy='user-menu-user-name']").should(
-      "have.text",
-      login.userName
-    );
-  });
+  it(
+    "Checks a regular User can access the app",
+    { tags: "@loginAPI" },
+    function () {
+      cy.visit(`${Cypress.config().baseUrl}/en/products`);
+      cy.url().should("include", "/products");
+      cy.log(`**--- Verify user's name---**`);
+      cy.get("[data-cy='user-menu-user-name']").should(
+        "have.text",
+        login.userName
+      );
+    }
+  );
 });
