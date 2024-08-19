@@ -1,0 +1,23 @@
+name: Prettier
+on: [push]
+
+jobs:
+  build:
+    name: Format code with Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the remote source code
+        uses: actions/checkout@v1
+
+      - name: Install and cache npm modules
+        uses: bahmutov/npm-install@v1
+
+      # Run Prettier from the package.json script
+      - run: npm run format
+      - run: git status
+
+      # https://github.com/stefanzweifel/git-auto-commit-action
+      - name: Commit and push any changed files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
