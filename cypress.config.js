@@ -1,4 +1,4 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   timeDelayEnabled: false,
@@ -6,7 +6,7 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   videoCompression: 0,
   defaultCommandTimeout: 20000,
-  env:{
+  env: {
     grepFilterSpecs: true, //pre-filter specs first
     grepPrefixAt: true, // prefix tags with '@'
   },
@@ -14,8 +14,8 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl: "https://cloud01-eu.testbench.com",
-    excludeSpecPattern: ["**/*.txt", "**/*.md"],
-    specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",
+    baseUrl: 'https://cloud01-eu.testbench.com',
+    excludeSpecPattern: ['**/*.txt', '**/*.md'],
+    specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
-});
+})

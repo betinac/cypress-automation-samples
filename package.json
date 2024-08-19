@@ -7,14 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:regression": "cypress run --env grepTags=regression"
+    "cy:regression": "cypress run --env grepTags=regression",
+    "format": "prettier --write './cypress/**/*.js'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@bahmutov/cy-grep": "^1.11.3",
-    "cypress": "^13.11.0"
+    "cypress": "^13.11.0",
+    "prettier": "3.3.3"
   },
   "dependencies": {
     "cypress-ajv-schema-validator": "^1.1.0"
