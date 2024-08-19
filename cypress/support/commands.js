@@ -1,4 +1,4 @@
-import "./commands/index";
+import './commands/index'
 
 // ***********************************************
 // This example commands.js shows you how to
