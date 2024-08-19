@@ -1,6 +1,10 @@
 name: Prettier
 on: [push]
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   build:
     name: Format code with Prettier
@@ -20,4 +24,4 @@ jobs:
       - name: Commit and push any changed files
         uses: stefanzweifel/git-auto-commit-action@v4
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
