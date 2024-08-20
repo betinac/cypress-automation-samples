@@ -8,7 +8,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:regression": "cypress run --env grepTags=regression",
-    "format": "prettier --write './cypress/**/*.js'"
+    "format": "prettier --write './**/*.js'"
   },
   "keywords": [],
   "author": "",
