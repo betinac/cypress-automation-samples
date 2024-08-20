@@ -54,3 +54,5 @@ _For example:_
 - [Filter tests](cypress/docs/Filter-tests.md): filter and run tests by a substring or Tags.
 
 - [Prettier & VSCode & Cypress](cypress/docs/Format.md): configure JavaScript code auto-formatting with Prettier to work per project.
+
+- [GitHub Actions](cypress/docs/Workflows.md): use the continuous integration and continuous delivery (CI/CD) platform to automate several actions.
