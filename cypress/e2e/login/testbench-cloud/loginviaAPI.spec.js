@@ -19,11 +19,6 @@ describe('Log in via the API', () => {
     })
   })
 
-  after(() => {
-    cy.log('**--- Log out the user (via API) ---**')
-    cy.logoutViaAPI(SESSION_TOKEN)
-  })
-
   it(
     'Checks a regular User can access the app',
     { tags: '@loginAPI' },
@@ -35,6 +30,15 @@ describe('Log in via the API', () => {
         'have.text',
         login.userName,
       )
+    },
+  )
+  it(
+    'Checks a regular User can log out from the app',
+    { tags: ['@logoutUI', '@regression'] },
+    () => {
+      cy.visit(`${Cypress.config().baseUrl}/en/products`)
+      cy.log('**--- Log out the user (via API) ---**')
+      cy.logoutViaAPI(SESSION_TOKEN)
     },
   )
 })
