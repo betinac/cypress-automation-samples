@@ -2,7 +2,8 @@ name: Manually run E2E Cypress tests # name of my workflow
 
 # event that triggers the workflow
 on:
-  workflow_dispatch: # Trigger the workflow manually
+  [push]
+  # workflow_dispatch: # Trigger the workflow manually
 
 # For each job, I'll get a Virtual Machine with the environment
 # specified by 'runs-on', that other jobs won't be able to access it
