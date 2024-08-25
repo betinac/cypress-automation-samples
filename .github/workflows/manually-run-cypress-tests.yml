@@ -1,0 +1,27 @@
+name: Manually run E2E Cypress tests # name of my workflow
+
+# event that triggers the workflow
+on:
+  workflow_dispatch: # Trigger the workflow manually
+
+# For each job, I'll get a Virtual Machine with the environment
+# specified by 'runs-on', that other jobs won't be able to access it
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    # small sub-tasks, where we can run commands, setup tasks or actions
+    steps:
+      # Clone the repo
+      - name: Check out the remote source code
+        uses: actions/checkout@v4
+      # Run 'npm install' on the cloned repo and install our dependencies
+      - name: Set up npm package
+        run: npm install
+        # Take the project's npm package manager lock file,
+        # install dependencies and cache them for future use,
+        # run Cypress end-to-end tests with the built-in Electron browser
+        # and provide a test summary after completion
+      - name: Run the E2E tests
+        uses: cypress-io/github-action@v6.1.0
+        with:
+          browser: Chrome
