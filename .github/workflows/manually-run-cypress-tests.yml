@@ -15,9 +15,6 @@ jobs:
       # Clone the repo
       - name: Check out the remote source code
         uses: actions/checkout@v4
-      # Run 'npm install' on the cloned repo and install our dependencies
-      - name: Set up npm package
-        run: npm install
         # Take the project's npm package manager lock file,
         # install dependencies and cache them for future use,
         # run Cypress end-to-end tests with the built-in Electron browser
@@ -25,4 +22,4 @@ jobs:
       - name: Run the E2E tests
         uses: cypress-io/github-action@v6.1.0
         with:
-          browser: chrome
+          browser: firefox
