@@ -25,4 +25,4 @@ jobs:
       - name: Run the E2E tests
         uses: cypress-io/github-action@v6.1.0
         with:
-          browser: Chrome
+          browser: chrome
