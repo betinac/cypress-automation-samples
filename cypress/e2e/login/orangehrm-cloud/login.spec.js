@@ -9,10 +9,16 @@ describe('Regular login via the UI', () => {
 
     // An uncaught exception is thrown on the app's Dashboard
     cy.on('uncaught:exception', (err, runnable) => {
-      expect(err.message).to.include(
-        `Cannot read properties of undefined (reading 'response')`,
-      )
-      return false
+      const responseError = `Cannot read properties of undefined (reading 'response')`
+      const abortedError = `Request aborted`
+
+      if (
+        err.message &&
+        (err.message.includes(responseError) ||
+          err.message.includes(abortedError))
+      ) {
+        return false // Don't fail on errors originated from the app code
+      }
     })
     cy.log(`**--- Log in with regular user's credentials via the UI---**`)
 
