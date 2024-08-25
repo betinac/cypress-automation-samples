@@ -11,6 +11,9 @@ module.exports = defineConfig({
     grepPrefixAt: true, // prefix tags with '@'
   },
   e2e: {
+    // specify user agent:
+    userAgent:
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; X11; Ubuntu; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0',
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
