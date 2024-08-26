@@ -13,7 +13,6 @@ jobs:
     strategy:
       matrix:
         browser: [chrome, firefox, edge] # run tests in all these browsers
-        containers: [1, 2, 3] # run tests in parallel
     # small sub-tasks, where we can run commands, setup tasks or actions
     steps:
       # Clone the repo
@@ -25,6 +24,3 @@ jobs:
         # and provide a test summary after completion
       - name: Run the E2E tests
         uses: cypress-io/github-action@v6.1.0
-        with:
-          parallel: true
-          group: 'Cypress Automation Samples'
