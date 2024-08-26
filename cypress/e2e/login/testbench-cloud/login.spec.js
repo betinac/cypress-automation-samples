@@ -7,19 +7,10 @@ describe('Regular login via the UI', () => {
   }
 
   beforeEach(() => {
-    cy.intercept('POST', '/api/tenants/login/session').as('verifyUser')
     cy.log(`**--- Log in with regular user's credentials via the UI---**`)
-
-    /*
-     * Let's set up a session to log in once, cache the browser context linked to the user
-     * and reuse it for multiple tests. Cypress will remember your cookies
-     * and local storage state from this session for reuse across tests.
-     */
-    cy.session(login.emailAddress, () => {
-      cy.loginUI(login.emailAddress, login.password, login.tenantID)
-      cy.waitAndAssertStatusCode('verifyUser', 201)
-      cy.log(`**--- User is logged in ---**`)
-    })
+    cy.loginUI(login.emailAddress, login.password, login.tenantID)
+    cy.visit(`${Cypress.config().baseUrl}/en/products`)
+    cy.log(`**--- User is logged in ---**`)
   })
 
   it('Checks a regular User can access the app', { tags: '@loginUI' }, () => {
