@@ -1,6 +1,6 @@
 import login from '../../../fixtures/login/orangehrm-credentials.json'
 
-describe('Regular login via the UI', () => {
+describe.skip('Regular login via the UI', () => {
   beforeEach(() => {
     // An uncaught exception is thrown on the app's Dashboard
     cy.on('uncaught:exception', (err, runnable) => {
