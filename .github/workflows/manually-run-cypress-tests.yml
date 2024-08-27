@@ -39,10 +39,10 @@ jobs:
           ls -l
           cd cypress
           ls -l
-          cd..
+          cd ..
           cd public
           ls -l
-          cp -r cypress/video public/videos
+          cp -r cypress/videos public/videos
 
       # Merge all the generated JSON reports
       - name: Merge test results into one
