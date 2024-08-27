@@ -9,7 +9,7 @@
     "cy:run": "cypress run",
     "cy:regression": "cypress run --env grepTags=regression",
     "format": "prettier --write './**/*.js'",
-    "delete:reports": "rm cypress/results/* || true",
+    "delete:reports": "rm -rf cypress/results/* || true",
     "report:merge": "mochawesome-merge cypress/results/json/*.json > index.json",
     "report:generate": "marge index.json --reportDir public --assetsDir public/assets --reportPageTitle index.html"
   },

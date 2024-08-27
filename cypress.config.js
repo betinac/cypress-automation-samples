@@ -4,7 +4,8 @@ module.exports = defineConfig({
   timeDelayEnabled: false,
   timeDelay: 1000,
   chromeWebSecurity: false,
-  videoCompression: 0,
+  video: true,
+  videoCompression: true, // smaller videos
   defaultCommandTimeout: 20000,
   env: {
     grepFilterSpecs: true, //pre-filter specs first
