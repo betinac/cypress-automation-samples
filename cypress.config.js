@@ -10,6 +10,10 @@ module.exports = defineConfig({
     grepFilterSpecs: true, //pre-filter specs first
     grepPrefixAt: true, // prefix tags with '@'
   },
+  reporter: 'cypress-multi-reporters', // enable multiple reporters
+  reporterOptions: {
+    configFile: 'reporter-config.json',
+  },
   e2e: {
     // specify user agent:
     userAgent:
