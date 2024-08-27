@@ -38,10 +38,11 @@ jobs:
           pwd
           ls -l
           cd cypress
+          cd videos
           ls -l
           cd ..
-          cd public
-          ls -l
+          cd ..
+          pwd
           cp -r cypress/videos public/videos
 
       # Merge all the generated JSON reports
