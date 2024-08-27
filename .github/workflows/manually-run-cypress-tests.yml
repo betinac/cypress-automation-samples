@@ -37,6 +37,11 @@ jobs:
           mkdir public
           pwd
           ls -l
+          cd cypress
+          ls -l
+          cd..
+          cd public
+          ls -l
           cp -r cypress/video public/videos
 
       # Merge all the generated JSON reports
