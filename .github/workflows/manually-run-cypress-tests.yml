@@ -35,6 +35,8 @@ jobs:
       - name: Copy test execution videos
         run: |
           mkdir public
+          pwd
+          ls -l
           cp -r cypress/video public/videos
 
       # Merge all the generated JSON reports
