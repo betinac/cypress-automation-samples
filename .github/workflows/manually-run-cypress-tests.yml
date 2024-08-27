@@ -5,6 +5,10 @@ on:
   [push]
   # workflow_dispatch: # Trigger the workflow manually
 
+permissions:
+  contents: write
+  pull-requests: write
+
 # For each job, I'll get a Virtual Machine with the environment
 # specified by 'runs-on', that other jobs won't be able to access it
 jobs:
@@ -24,3 +28,28 @@ jobs:
         # and provide a test summary after completion
       - name: Run the E2E tests
         uses: cypress-io/github-action@v6.1.0
+        continue-on-error: true # continue running other workflows even if tests fail
+
+      # Create a public folder to hold the HTML report
+      # Videos are copied to the public folder
+      - name: Copy test execution videos
+        run: |
+          mkdir public
+          cp -r cypress/video public/videos
+
+      # Merge all the generated JSON reports
+      - name: Merge test results into one
+        run: npm run report:merge
+
+      # Generate an HTML report from the merged JSON report
+      - name: Generate HTML report
+        run: npm run report:generate
+
+      # Publish the generated HTML report
+      - name: Deploy report page
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          publish_dir: ./public
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
