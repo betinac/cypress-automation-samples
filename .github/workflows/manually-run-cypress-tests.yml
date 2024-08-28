@@ -35,7 +35,10 @@ jobs:
       - name: Copy test execution videos
         run: |
           mkdir public
-          cp -r cypress/videos public/videos
+
+      # Copy screenshots and videos to the public reporting folder
+      - name: Merge test results into one
+        run: npm run report:copyAssets
 
       # Merge all the generated JSON reports
       - name: Merge test results into one
