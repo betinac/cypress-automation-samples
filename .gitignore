@@ -3,6 +3,7 @@ cypress.env.json
 cypress/downloads/
 cypress/screenshots/
 cypress/videos/
+cypress/results/
 node_modules/
 mochawesome-report/
-results/
+public/

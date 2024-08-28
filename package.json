@@ -9,9 +9,10 @@
     "cy:run": "cypress run",
     "cy:regression": "cypress run --env grepTags=regression",
     "format": "prettier --write './**/*.js'",
-    "delete:reports": "rm -rf cypress/results/* || true",
+    "delete:reports": "rm -rf cypress/results/* cypress/screenshots/* cypress/videos/* public/screenshots/* public/videos/* || true",
     "report:merge": "mochawesome-merge cypress/results/json/*.json > index.json",
-    "report:generate": "marge index.json --reportDir public --assetsDir public/assets --reportPageTitle index.html"
+    "report:generate": "marge index.json --reportDir public --assetsDir public/assets --reportPageTitle index.html",
+    "report:copyAssets": "cp -r cypress/screenshots public && cp -r cypress/videos public"
   },
   "keywords": [],
   "author": "",
