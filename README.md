@@ -60,6 +60,8 @@ _For example:_
 - Another option is to use the scripts from the `package.json` file:
   - `npm run cy:open` - Opens the Cypress Test Runner app
   - `npm run cy:run` - Run the tests in the command line
+- To manually run the tests and also generate a Summary Report:
+  - `npx cypress open  --browser chrome --reporter mochawesome`
 
 ---
 
