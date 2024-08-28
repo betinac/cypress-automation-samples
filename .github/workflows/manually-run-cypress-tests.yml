@@ -22,6 +22,13 @@ jobs:
       # Clone the repo
       - name: Check out the remote source code
         uses: actions/checkout@v4
+
+      # Echo the secret's value and redirect it to the "cypress.env.json" file,
+      # overwriting the existing file
+      - name: Write the cypress.env.json file
+        run: |
+          echo '${{ secrets.CYPRESS_ENV_TESTBENCH }}' > cypress.env.json
+
         # Take the project's npm package manager lock file,
         # install dependencies and cache them for future use,
         # run Cypress end-to-end tests with the built-in Electron browser
