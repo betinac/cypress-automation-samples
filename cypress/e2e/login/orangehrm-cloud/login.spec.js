@@ -1,5 +1,6 @@
 import login from '../../../fixtures/login/orangehrm-credentials.json'
 
+// Skipping this test as the main website is permanently down
 describe.skip('Regular login via the UI', () => {
   beforeEach(() => {
     // An uncaught exception is thrown on the app's Dashboard

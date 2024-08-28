@@ -19,6 +19,23 @@ Cypress.Commands.add('loginUI', (email, password, tenantID) => {
   })
 })
 
+Cypress.Commands.add(
+  'checkInvalidCredentials',
+  (email, password, tenantID, statusCode) => {
+    if (!statusCode) {
+      statusCode = 400
+    }
+    cy.get("[data-cy='tenant-input']").type(tenantID, { delay: 0 })
+    cy.get("[data-cy='login-input']").type(email, { log: false, delay: 0 })
+    cy.get("[data-cy='password-input']").type(password, {
+      log: false,
+      delay: 0,
+    })
+    cy.get("[data-cy='login-button']").click()
+    cy.waitAndAssertStatusCode('verifyUser', statusCode)
+  },
+)
+
 Cypress.Commands.add('loginOrangeHrmUI', (username, password, url) => {
   cy.intercept(
     'POST',

@@ -8,7 +8,7 @@ describe('Regular login via the UI', () => {
 
   beforeEach(() => {
     cy.log(`**--- Log in with regular user's credentials via the UI---**`)
-    cy.loginUI(login.emailAddress, login.password, login.tenantID)
+    cy.loginUI(login.emailAddress, login.password, login.tenantID, 201)
     cy.visit(`${Cypress.config().baseUrl}/en/products`)
     cy.log(`**--- User is logged in ---**`)
   })

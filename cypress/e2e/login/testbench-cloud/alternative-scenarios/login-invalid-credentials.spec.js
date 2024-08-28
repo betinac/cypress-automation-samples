@@ -4,6 +4,9 @@ const login = {
   tenantID: Cypress.env('tenantID'),
 }
 
+const errorMessage =
+  'Please enter a matching set of workspace, user login and password.'
+
 describe('Invalid credentials via the UI', () => {
   beforeEach(() => {
     cy.intercept('POST', '/api/tenants/login/session').as('verifyUser')
@@ -15,7 +18,6 @@ describe('Invalid credentials via the UI', () => {
     { tags: '@loginUI' },
     () => {
       cy.get("[data-cy='login-button']").click()
-      cy.waitAndAssertStatusCode('verifyUser', 400)
 
       cy.log(`**--- Verify error message ---**`)
       cy.get('#tenant-input-error-hint').contains(
@@ -30,13 +32,15 @@ describe('Invalid credentials via the UI', () => {
     'Should show an error message for invalid tenant credentials',
     { tags: '@loginUI' },
     () => {
-      cy.loginUI(login.userName, login.password, 'invalid-tenantId')
-      cy.waitAndAssertStatusCode('verifyUser', 403)
+      cy.checkInvalidCredentials(
+        login.userName,
+        login.password,
+        'invalid-tenantId',
+        403,
+      )
 
       cy.log(`**--- Verify error message ---**`)
-      cy.get("[data-cy='login-error']").contains(
-        'Please enter a matching set of workspace, user login and password.',
-      )
+      cy.get("[data-cy='login-error']").contains(errorMessage)
     },
   )
 
@@ -44,13 +48,15 @@ describe('Invalid credentials via the UI', () => {
     'Should show an error message for invalid user credentials',
     { tags: ['@loginUI', '@regression'] },
     () => {
-      cy.loginUI('invalid-email', login.password, login.tenantID)
-      cy.waitAndAssertStatusCode('verifyUser', 403)
+      cy.checkInvalidCredentials(
+        'invalid-email',
+        login.password,
+        login.tenantID,
+        403,
+      )
 
       cy.log(`**--- Verify error message ---**`)
-      cy.get("[data-cy='login-error']").contains(
-        'Please enter a matching set of workspace, user login and password.',
-      )
+      cy.get("[data-cy='login-error']").contains(errorMessage)
     },
   )
 
@@ -58,13 +64,15 @@ describe('Invalid credentials via the UI', () => {
     'Should show an error message for invalid password credentials',
     { tags: ['@loginUI', '@regression'] },
     () => {
-      cy.loginUI(login.userName, 'invalid-password', login.tenantID)
-      cy.waitAndAssertStatusCode('verifyUser', 403)
+      cy.checkInvalidCredentials(
+        login.userName,
+        'invalid-password',
+        login.tenantID,
+        403,
+      )
 
       cy.log(`**--- Verify error message ---**`)
-      cy.get("[data-cy='login-error']").contains(
-        'Please enter a matching set of workspace, user login and password.',
-      )
+      cy.get("[data-cy='login-error']").contains(errorMessage)
     },
   )
 })

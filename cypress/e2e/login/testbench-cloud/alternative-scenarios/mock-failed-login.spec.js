@@ -17,12 +17,18 @@ describe('Attempt to log in via the UI while mocking the response', () => {
           failureType: 'LoginFailedIncorrectData',
           message: 'Incorrect workspace, login or password.',
         },
-      }).as('validateUser')
+      }).as('verifyUser')
+
+      cy.visit(`${Cypress.config().baseUrl}/en/login`)
 
       // Enter valid credentials, the user should not be logged in
       // as we have mocked the response of the intercepted API
-      cy.loginUI(login.emailAddress, login.password, login.tenantID)
-      cy.waitAndAssertStatusCode('validateUser', 403)
+      cy.checkInvalidCredentials(
+        login.emailAddress,
+        login.password,
+        login.tenantID,
+        403,
+      )
 
       // Validate that the error message is displayed
       cy.contains(
