@@ -1,7 +1,11 @@
 import login from '../../../fixtures/login/orangehrm-credentials.json'
 
+const secretLogin = {
+  username: Cypress.env('username'),
+  password: Cypress.env('password'),
+}
 // Skipping this test as the main website is permanently down
-describe.skip('Regular login via the UI', () => {
+describe('Regular login via the UI', () => {
   beforeEach(() => {
     // An uncaught exception is thrown on the app's Dashboard
     cy.on('uncaught:exception', (err, runnable) => {
@@ -17,7 +21,11 @@ describe.skip('Regular login via the UI', () => {
       }
     })
     cy.log(`**--- Log in with regular user's credentials via the UI---**`)
-    cy.loginOrangeHrmUI(login.userName, login.password, login.orangeHrmUrl)
+    cy.loginOrangeHrmUI(
+      secretLogin.username,
+      secretLogin.password,
+      login.orangeHrmUrl,
+    )
     // Explicitelly visit the main page
     cy.visit(login.orangeHrmUrl)
   })

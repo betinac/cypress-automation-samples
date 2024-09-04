@@ -29,6 +29,12 @@ import 'cypress-ajv-schema-validator'
 const registerCypressGrep = require('@bahmutov/cy-grep')
 registerCypressGrep()
 
+before(() => {
+  // Clear up all sessions, even if we re-run the spec
+  cy.log('close all sessions')
+  Cypress.session.clearAllSavedSessions()
+})
+
 Cypress.on('test:after:run', (test, runnable) => {
   // Add videos and screenshots ONLY if the test failed
   if (test.state === 'failed') {
