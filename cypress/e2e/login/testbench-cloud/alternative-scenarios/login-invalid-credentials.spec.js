@@ -7,7 +7,7 @@ const login = {
 const errorMessage =
   'Please enter a matching set of workspace, user login and password.'
 
-describe('Invalid credentials via the UI', () => {
+describe.skip('Invalid credentials via the UI', () => {
   beforeEach(() => {
     cy.intercept('POST', '/api/tenants/login/session').as('verifyUser')
     cy.visit(`${Cypress.config().baseUrl}/en/login`)

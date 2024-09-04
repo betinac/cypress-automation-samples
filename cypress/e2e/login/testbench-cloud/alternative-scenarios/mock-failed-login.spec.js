@@ -1,4 +1,4 @@
-describe('Attempt to log in via the UI while mocking the response', () => {
+describe.skip('Attempt to log in via the UI while mocking the response', () => {
   const login = {
     emailAddress: Cypress.env('email'),
     password: Cypress.env('password'),

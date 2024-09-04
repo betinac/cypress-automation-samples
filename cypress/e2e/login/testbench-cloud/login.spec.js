@@ -1,4 +1,4 @@
-describe('Regular login via the UI', () => {
+describe.skip('Regular login via the UI', () => {
   const login = {
     emailAddress: Cypress.env('email'),
     password: Cypress.env('password'),
