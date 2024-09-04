@@ -26,7 +26,7 @@ describe('Regular login via the UI', () => {
       secretLogin.password,
       login.orangeHrmUrl,
     )
-    // Explicitelly visit the main page
+    // Explicitly visit the main page
     cy.visit(login.orangeHrmUrl)
   })
 
