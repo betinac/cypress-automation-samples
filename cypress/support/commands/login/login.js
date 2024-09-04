@@ -49,6 +49,7 @@ Cypress.Commands.add('loginOrangeHrmUI', (username, password, url) => {
    */
   cy.session('OrangeHRM login', () => {
     cy.visit(url)
+    cy.log(`u: ${username}, p: ${password}`)
     cy.get("[name='username']").clear().type(username, { log: false })
     cy.get("[type='password']").clear().type(password, { log: false })
     cy.get("[type='submit']").click()

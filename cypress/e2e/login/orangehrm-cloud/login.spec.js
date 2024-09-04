@@ -21,6 +21,7 @@ describe('Regular login via the UI', () => {
       }
     })
     cy.log(`**--- Log in with regular user's credentials via the UI---**`)
+    cy.log(secretLogin)
     cy.loginOrangeHrmUI(
       secretLogin.username,
       secretLogin.password,
