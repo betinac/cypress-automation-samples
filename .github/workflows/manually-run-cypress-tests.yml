@@ -42,7 +42,7 @@ jobs:
       # Create a public folder to hold the HTML report
       - name: Create a public folder for the HTML report
         run: |
-          mkdir cypress/screenshots cypress/videos
+          mkdir -p cypress/screenshots cypress/videos
           mkdir public
 
       # Copy screenshots and videos to the public reporting folder
