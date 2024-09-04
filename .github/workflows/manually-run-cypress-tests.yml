@@ -17,6 +17,7 @@ jobs:
     #strategy:
     #  matrix:
     #    browser: [chrome, firefox, edge] # run tests in all these browsers
+
     # small sub-tasks, where we can run commands, setup tasks or actions
     steps:
       # Clone the repo
@@ -27,7 +28,7 @@ jobs:
       # overwriting the existing file
       - name: Write the cypress.env.json file
         run: |
-          echo '${{ secrets.CYPRESS_ENV_TESTBENCH }}' > cypress.env.json
+          echo '${{ secrets.CYPRESS_ENV_ORANGEHRM }}' > cypress.env.json
 
         # Take the project's npm package manager lock file,
         # install dependencies and cache them for future use,
@@ -38,13 +39,12 @@ jobs:
         continue-on-error: true # continue running other workflows even if tests fail
 
       # Create a public folder to hold the HTML report
-      # Videos are copied to the public folder
-      - name: Copy test execution videos
+      - name: Create a public folder for the HTML report
         run: |
           mkdir public
 
       # Copy screenshots and videos to the public reporting folder
-      - name: Merge test results into one
+      - name: Copy screenshots and videos to the public folder
         run: npm run report:copyAssets
 
       # Merge all the generated JSON reports

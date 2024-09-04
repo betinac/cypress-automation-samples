@@ -18,8 +18,9 @@ I've installed these 3 dependencies:
 - mochawesome-merge
 - mochawesome-report-generator
 
-I've created 2 scripts to merge and deploy the test results:
+I've created 3 scripts to merge and deploy the test results:
 
+- report:copyAssets
 - report:merge
 - report:generate
 
