@@ -51,10 +51,7 @@ jobs:
 
       # Copy screenshots and videos to the public reporting folder
       - name: Copy screenshots and videos to the public folder
-        run: |
-          npm run report:copyAssets
-          ls -la cypress/screenshots
-          ls -la cypress/videos
+        run: npm run report:copyAssets
 
       # Merge all the generated JSON reports
       - name: Merge test results into one
