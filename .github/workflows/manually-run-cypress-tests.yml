@@ -10,6 +10,10 @@ name: Manually run E2E Cypress tests # name of my workflow
 on:
   #[push]
   workflow_dispatch: # Trigger the workflow manually
+    inputs:
+      grepTags:
+        description: Test tags
+        required: false
 
 permissions:
   contents: write
@@ -42,6 +46,9 @@ jobs:
       - name: Run the E2E tests
         uses: cypress-io/github-action@v6.1.0
         continue-on-error: true # continue running other workflows even if tests fail
+        with:
+          #env: grepTags="@mocked @contract"
+          env: grepTags=${{ github.event.inputs.grepTags }}
 
       # Create folders to contain screenshots and videos
       - name: Create screenshots and videos folders
