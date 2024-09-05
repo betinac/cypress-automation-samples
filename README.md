@@ -38,19 +38,17 @@
 
 #### Requirements & Configuration
 
-- Just for running the tests under the `/e2e/login` folder, you'll need an account on the app I'm using for testing: **TestBench Cloud** (or email me and I can temporary share one of mine).
+- Just for running the login tests under the `/e2e/login` folder, you'll need an account on the sandbox app I'm using for testing: **POCO Mega Store**. [Create your new account first](https://ecommerce-playground.lambdatest.io/index.php?route=account/account) and then save your credentials.
 
-- On the project root path, create a new file called `cypress.env.json` and replace the variables with the credentials from your own TestBench Cloud account.
+- On the project root path, create a new file called `cypress.env.json` and replace the variables with the credentials from the step above.
 
 _For example:_
 
 ```
 //cypress.env.json file's content
 {
-    "userName": "My User Name",
-    "email": "my-user",
-    "password": "s3creT-p@ssw0rd",
-    "tenantID": "HS"
+    "username": "my-user",
+    "password": "s3creT-p@ssw0rd"
 }
 ```
 
@@ -60,6 +58,17 @@ _For example:_
 - Another option is to use the scripts from the `package.json` file:
   - `npm run cy:open` - Opens the Cypress Test Runner app
   - `npm run cy:run` - Run the tests in the command line
+- To manually run the tests and also generate a Summary Report:
+  - `npx cypress open  --browser chrome --reporter mochawesome`
+- Clear the local files that will be generated and then run the following commands\*:
+  1. `npm run delete:reports`
+  2. `npm run cy:run`
+  3. `npm run report:copyAssets`
+  4. `npm run report:merge`
+  5. `npm run report:generate`
+  6. Open the `public/index.html` file that is stored under the root folder. [Mochawesome report](cypress/docs/images/index-html.png)
+
+_(\*) Check the `package.json` file for more details on what each script is doing. I've left them separated on purpose._
 
 ---
 
@@ -75,6 +84,6 @@ _For example:_
 
 - [Pull requests template](cypress/docs/Pull-Requests.md): check a suggested structure for a Pull Request (PR).
 
-- [GitHub Actions](cypress/docs/Workflows.md): use the continuous integration and continuous delivery (CI/CD) platform to automate several actions.
+- [Continuous Integration for E2E Cypress tests & GitHub Actions](cypress/docs/Workflows.md): use the continuous integration and continuous delivery (CI/CD) platform to automate several actions.
 
 - [Prettier & VSCode & Cypress](cypress/docs/Format.md): configure JavaScript code auto-formatting with Prettier to work per project.

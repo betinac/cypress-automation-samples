@@ -8,14 +8,23 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:regression": "cypress run --env grepTags=regression",
-    "format": "prettier --write './**/*.js'"
+    "format": "prettier --write './**/*.js'",
+    "delete:reports": "rm -rf cypress/results/* cypress/screenshots/* cypress/videos/* public/screenshots/* public/videos/* || true",
+    "report:merge": "mochawesome-merge cypress/results/json/*.json > index.json",
+    "report:generate": "marge index.json --reportDir public --assetsDir public/assets --reportPageTitle index.html",
+    "report:copyAssets": "cp -r cypress/screenshots public && cp -r cypress/videos public"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@bahmutov/cy-grep": "^1.11.3",
-    "cypress": "^13.11.0",
+    "cypress": "13.13.3",
+    "cypress-multi-reporters": "^1.6.4",
+    "mocha": "^10.7.3",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0",
     "prettier": "3.3.3"
   },
   "dependencies": {

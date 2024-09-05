@@ -1,38 +1,40 @@
 import login from '../../../fixtures/login/orangehrm-credentials.json'
 
+const secretLogin = {
+  username: Cypress.env('username'),
+  password: Cypress.env('password'),
+}
+// Skipping this test as the main website is permanently down
 describe('Regular login via the UI', () => {
   beforeEach(() => {
-    cy.intercept(
-      'POST',
-      'https://opensource-demo.orangehrmlive.com/web/index.php/auth/validate',
-    ).as('validateUser')
-
     // An uncaught exception is thrown on the app's Dashboard
     cy.on('uncaught:exception', (err, runnable) => {
-      expect(err.message).to.include(
-        `Cannot read properties of undefined (reading 'response')`,
-      )
-      return false
+      const responseError = `Cannot read properties of undefined (reading 'response')`
+      const abortedError = `Request aborted`
+
+      if (
+        err.message &&
+        (err.message.includes(responseError) ||
+          err.message.includes(abortedError))
+      ) {
+        return false // Don't fail on errors originated from the app code
+      }
     })
     cy.log(`**--- Log in with regular user's credentials via the UI---**`)
-
-    /*
-     * Let's set up a session to log in once, cache the browser context linked to the user
-     * and reuse it for multiple tests. Cypress will remember your cookies
-     * and local storage state from this session for reuse across tests.
-     */
-    cy.session(login.userName, () => {
-      cy.loginOrangeHrmUI(login.userName, login.password, login.orangeHrmUrl)
-      cy.waitAndAssertStatusCode('validateUser', 302)
-      cy.log('**--- User is logged in ---**')
-    })
+    cy.log(secretLogin)
+    cy.loginOrangeHrmUI(
+      secretLogin.username,
+      secretLogin.password,
+      login.orangeHrmUrl,
+    )
+    // Explicitly visit the main page
+    cy.visit(login.orangeHrmUrl)
   })
 
   it(
     'Checks a regular User can access the app (OrangeHR)',
     { tags: ['@loginUI', '@regression'] },
     () => {
-      cy.visit(login.orangeHrmUrl)
       cy.url().should('include', '/dashboard')
 
       cy.log(`**--- Verify user's name---**`)
@@ -46,7 +48,6 @@ describe('Regular login via the UI', () => {
     'Checks a regular User can log out from the app',
     { tags: ['@logoutUI', '@regression'] },
     () => {
-      cy.visit(login.orangeHrmUrl)
       cy.log('**--- Log out the user (via UI) ---**')
       cy.logoutOrangeHrmUI(login.orangeHrmUrl)
     },

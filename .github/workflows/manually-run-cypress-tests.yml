@@ -1,0 +1,80 @@
+# Author: Betina Perez Neder
+# Description: this workflow runs all Cypress tests
+# in Chrome, Firefox and Edge browsers and generates
+# a mochawesome Summary Report at
+# https://betinac.github.io/cypress-automation-samples/
+
+name: Manually run E2E Cypress tests # name of my workflow
+
+# event that triggers the workflow
+on:
+  #[push]
+  workflow_dispatch: # Trigger the workflow manually
+    inputs:
+      grepTags:
+        description: Test tags
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# For each job, I'll get a Virtual Machine with the environment
+# specified by 'runs-on', that other jobs won't be able to access it
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, firefox, edge] # run tests in all these browsers
+
+    # small sub-tasks, where we can run commands, setup tasks or actions
+    steps:
+      # Clone the repo
+      - name: Check out the remote source code
+        uses: actions/checkout@v4
+
+      # Echo the secret's value and redirect it to the "cypress.env.json" file,
+      # overwriting the existing file
+      - name: Write the cypress.env.json file
+        run: echo '${{ secrets.CYPRESS_ENV_ORANGEHRM }}' > cypress.env.json
+
+        # Take the project's npm package manager lock file,
+        # install dependencies and cache them for future use,
+        # run Cypress end-to-end tests with the built-in Electron browser
+        # and provide a test summary after completion
+      - name: Run the E2E tests
+        uses: cypress-io/github-action@v6.1.0
+        continue-on-error: true # continue running other workflows even if tests fail
+        with:
+          #env: grepTags="@mocked @contract"
+          env: grepTags=${{ github.event.inputs.grepTags }}
+
+      # Create folders to contain screenshots and videos
+      - name: Create screenshots and videos folders
+        run: mkdir -p cypress/screenshots cypress/videos
+
+      # Create a public folder to hold the HTML report
+      - name: Create a public folder for the HTML report
+        run: mkdir public
+
+      # Copy screenshots and videos to the public reporting folder
+      - name: Copy screenshots and videos to the public folder
+        run: npm run report:copyAssets
+
+      # Merge all the generated JSON reports
+      - name: Merge test results into one
+        run: npm run report:merge
+
+      # Generate an HTML report from the merged JSON report
+      - name: Generate HTML report
+        run: npm run report:generate
+
+      # Publish the generated HTML report
+      - name: Deploy report page
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          publish_dir: ./public
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'

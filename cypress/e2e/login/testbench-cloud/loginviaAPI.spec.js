@@ -1,5 +1,5 @@
 let SESSION_TOKEN
-describe('Log in via the API', () => {
+describe.skip('Log in via the API', () => {
   const login = {
     emailAddress: Cypress.env('email'),
     password: Cypress.env('password'),

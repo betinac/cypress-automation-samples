@@ -15,6 +15,7 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import addContext from 'mochawesome/addContext'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
@@ -27,3 +28,43 @@ import 'cypress-ajv-schema-validator'
 // https://github.com/bahmutov/cy-grep
 const registerCypressGrep = require('@bahmutov/cy-grep')
 registerCypressGrep()
+
+before(() => {
+  // Clear up all sessions, even if we re-run the spec
+  cy.log('close all sessions')
+  Cypress.session.clearAllSavedSessions()
+})
+
+Cypress.on('test:after:run', (test, runnable) => {
+  // Add videos and screenshots ONLY if the test failed
+  if (test.state === 'failed') {
+    /*
+     * Adding videos to the Mochawesome report
+     */
+    let videoName = Cypress.spec.relative
+    // Trim the beginning portion 'cypress/e2e/'
+    videoName = videoName.replace(/^cypress\/e2e\//, '')
+    videoName = videoName.replace('/.js.*', '.js')
+    const videoUrl = 'videos/' + videoName + '.mp4'
+    addContext({ test }, videoUrl)
+
+    /*
+     * Adding screenshots to the Mochawesome report
+     */
+    let item = runnable
+    const nameParts = [runnable.title]
+    // Iterate through all parents and grab the titles
+    while (item.parent) {
+      nameParts.unshift(item.parent.title)
+      item = item.parent
+    }
+    // this is how cypress joins the test title fragments
+    const fullTestName = nameParts.filter(Boolean).join(' -- ')
+    let screenshotName = Cypress.spec.relative
+    // Trim the beginning portion 'cypress/e2e/'
+    screenshotName = screenshotName.replace(/^cypress\/e2e\//, '')
+    const imageUrl = `screenshots/${screenshotName}/${fullTestName} (failed).png`
+
+    addContext({ test }, imageUrl)
+  }
+})
