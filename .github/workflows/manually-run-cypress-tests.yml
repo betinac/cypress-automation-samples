@@ -14,9 +14,9 @@ permissions:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    #strategy:
-    #  matrix:
-    #    browser: [chrome, firefox, edge] # run tests in all these browsers
+    strategy:
+      matrix:
+        browser: [chrome, firefox, edge] # run tests in all these browsers
 
     # small sub-tasks, where we can run commands, setup tasks or actions
     steps:
