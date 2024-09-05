@@ -27,3 +27,11 @@ I've created 3 scripts to merge and deploy the test results:
 The final report is published in a GitHub Page: https://betinac.github.io/cypress-automation-samples/
 
 Find the recipe here: `.github/workflows/manually-run-cypress-tests.yml`
+
+### Example of a mochawesome report
+
+- [GitHub Summary Report when there are no failures](cypress/docs/images/gh-summary-passed.png)
+- [GitHub Summary Report when there are some failures](cypress/docs/images/gh-summary-failures.png)
+
+- [Published Mochawesome Report with no failures](cypress/docs/images/index-html.png)
+- [Published Mochawesome Report with failures](cypress/docs/images/report-with-failures.png)
