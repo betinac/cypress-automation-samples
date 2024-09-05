@@ -39,15 +39,22 @@ jobs:
         uses: cypress-io/github-action@v6.1.0
         continue-on-error: true # continue running other workflows even if tests fail
 
+      # Create folders to contain screenshots and videos
+      - name: Create screenshots and videos folders
+        run: |
+          mkdir -p cypress/screenshots cypress/videos
+
       # Create a public folder to hold the HTML report
       - name: Create a public folder for the HTML report
         run: |
-          mkdir -p cypress/screenshots cypress/videos
           mkdir public
 
       # Copy screenshots and videos to the public reporting folder
       - name: Copy screenshots and videos to the public folder
-        run: npm run report:copyAssets
+        run: |
+          npm run report:copyAssets
+          ls -la cypress/screenshots
+          ls -la cypress/videos
 
       # Merge all the generated JSON reports
       - name: Merge test results into one
