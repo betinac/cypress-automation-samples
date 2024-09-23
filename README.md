@@ -1,4 +1,4 @@
-# Cypress [![Cypress Version](https://img.shields.io/badge/Cypress-v13.11.0-brightgreen)](https://www.cypress.io/)
+# Cypress [![Cypress Version](https://img.shields.io/badge/Cypress-v13.11.0-brightgreen)](https://www.cypress.io/) ![Tests status](https://github.com/betinac/cypress-automation-samples/actions/workflows/manually-run-cypress-tests.yml/badge.svg)
 
 <p align="center">
   <img src="https://cdn.deliciousbrains.com/content/uploads/2018/09/28135025/db-End2EndTestingCypress-1540x748.jpg.webp"></img>

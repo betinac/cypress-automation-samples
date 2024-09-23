@@ -1,9 +1,11 @@
 import login from '../../../fixtures/login/orangehrm-credentials.json'
 
+// Get credentials from cypress.env.json file
 const secretLogin = {
   username: Cypress.env('username'),
   password: Cypress.env('password'),
 }
+
 // Skipping this test as the main website is permanently down
 describe('Regular login via the UI', () => {
   beforeEach(() => {
