@@ -1,4 +1,10 @@
+/*
+  Heads up! Unfortunately, the TestBench Cloud app that I used for automating 
+  the login tests, has been retired from the market in August, 2024. I've 
+  skipped the tests and left them as an example, but they can't be run anymore.
+*/
 describe.skip('Attempt to log in via the UI while mocking the response', () => {
+  // Get credentials from cypress.env.json file
   const login = {
     emailAddress: Cypress.env('email'),
     password: Cypress.env('password'),
