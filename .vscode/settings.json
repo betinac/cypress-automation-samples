@@ -7,5 +7,6 @@
   "editor.formatOnPaste": false,
   "json.format.enable": false,
   "editor.fontSize": 14, // override global font size
-  "editor.wordWrap": "on"
+  "editor.wordWrap": "on",
+  "debug.javascript.automaticallyTunnelRemoteServer": false
 }
