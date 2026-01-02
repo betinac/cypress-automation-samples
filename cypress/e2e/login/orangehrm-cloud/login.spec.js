@@ -43,7 +43,7 @@ describe('Regular login via the UI', () => {
       // We cannot use the user's name as it changes every time we log in
       // cy.get(".oxd-userdropdown-name").should('have.text', login.user)
       // Let's then assert the title (unfortunately I have to use the class name)
-      cy.get('.oxd-topbar-header-title').contains('Dashboard')
+      cy.get('.oxd-topbar-header-title').should('have.text', 'Dashboard')
     },
   )
   it(

@@ -17,6 +17,10 @@
 import './commands'
 import addContext from 'mochawesome/addContext'
 
+// load the cypress-diff plug-in to highlight the difference
+// between the actual and expected results in your test
+require('cypress-diff')
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
